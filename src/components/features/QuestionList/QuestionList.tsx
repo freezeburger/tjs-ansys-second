@@ -44,14 +44,19 @@ const mockedQuestions = [
 const QuestionList = () => {
 
   const [questions, setQuestions] = React.useState<Question[]>( [] );
+  const [loading, setLoading] = React.useState(  store.getState().loading );
   
   React.useEffect( () => {
-    store.subscribe( () => setQuestions(store.getState().questions) );
+    store.subscribe( () => {
+      setQuestions(store.getState().questions);
+      setLoading( store.getState().loading)
+    });
     store.dispatch({type:ActionTypes.QUESTION_LIST_REQUEST,data:null});
   },[])
 
   return(
     <>
+      { loading  && <p>Loading...</p> }
       <AntList  
           header={<SearchBox />}
           bordered

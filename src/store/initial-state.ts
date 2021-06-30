@@ -1,4 +1,6 @@
 export const initialState = {
+    loading: false,
+    users:[],
     questions: [
         {
             "id": 1,
