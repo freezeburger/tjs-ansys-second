@@ -1,5 +1,6 @@
 import React from 'react'
 import './QuestionForm.css'
+import store, { ActionTypes } from '../../../store';
 
 import {
   Card as AntCard,
@@ -14,6 +15,7 @@ const QuestionForm = () => {
 
   const onFinish = (values: any) => {
     console.log('Success:', values)
+    store.dispatch({type:ActionTypes.QUESTION_ASK, data:values})
   }
 
   const onReset = () => {

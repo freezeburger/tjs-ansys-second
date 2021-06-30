@@ -1,5 +1,5 @@
 import React from 'react'
-import { Question } from '../@interfaces/question'
+import { Question } from '../../../store/@interfaces/question'
 import './QuestionListItem.css'
 
 import {

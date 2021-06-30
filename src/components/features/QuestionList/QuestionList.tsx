@@ -4,6 +4,8 @@ import './QuestionList.css';
 import { List as AntList,  } from 'antd';
 import SearchBox from '../SearchBox/SearchBox';
 import QuestionListItem from '../QuestionListItem/QuestionListItem';
+import { Question } from '../../../store/@interfaces/question';
+import store, { ActionTypes } from '../../../store';
 
 const mockedQuestions = [
   {
@@ -41,7 +43,12 @@ const mockedQuestions = [
 
 const QuestionList = () => {
 
-  const [questions, setQuestions] = React.useState(mockedQuestions);
+  const [questions, setQuestions] = React.useState<Question[]>( [] );
+  
+  React.useEffect( () => {
+    store.subscribe( () => setQuestions(store.getState().questions) );
+    store.dispatch({type:ActionTypes.QUESTION_LIST_REQUEST,data:null});
+  },[])
 
   return(
     <>
@@ -50,7 +57,7 @@ const QuestionList = () => {
           bordered
           size="large"
           dataSource={questions}
-          renderItem={ (item,idx) => <QuestionListItem item={item} key={item.id}/>} />
+          renderItem={ (item,idx) => <QuestionListItem item={item} key={ item.id }/>} />
     </>
   )
 };
